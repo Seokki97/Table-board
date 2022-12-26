@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "member")
 @Data
+@AllArgsConstructor
 public class Member {
 
     @Id
@@ -22,6 +23,8 @@ public class Member {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
     //패스워드 암호화
     public void encodePassword(PasswordEncoder passwordEncoder){
         this.password = passwordEncoder.encode(password);

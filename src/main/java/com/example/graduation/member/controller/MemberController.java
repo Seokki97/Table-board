@@ -4,13 +4,10 @@ import com.example.graduation.member.dto.MemberRequestDto;
 import com.example.graduation.member.repository.MemberRepository;
 import com.example.graduation.member.service.SignUpSerivce;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
-@RequestMapping("/mamber")
+@RequestMapping("member")
 @RestController
 public class MemberController {
 
@@ -18,8 +15,8 @@ public class MemberController {
     private final MemberRepository memberRepository;
 
 
-    @PostMapping("/join")
-    public Long join(@RequestBody MemberRequestDto memberRequestDto) throws Exception{
+    @PostMapping("/signUp")
+    public Long signUp(@RequestBody MemberRequestDto memberRequestDto) throws Exception{
         return signUpSerivce.signUp(memberRequestDto);
     }
 }

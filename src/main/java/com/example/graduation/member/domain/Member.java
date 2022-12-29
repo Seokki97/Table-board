@@ -31,6 +31,7 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
     //패스워드 암호화
+
     public void encodePassword(PasswordEncoder passwordEncoder){
         this.password = passwordEncoder.encode(password);
     }

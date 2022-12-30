@@ -7,7 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import javax.persistence.*;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "graduation")
+@Entity(name = "member")
 @Table(name = "member")
 @Data
 public class Member {

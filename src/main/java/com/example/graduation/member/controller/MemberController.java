@@ -1,5 +1,6 @@
 package com.example.graduation.member.controller;
 
+import com.example.graduation.member.domain.Member;
 import com.example.graduation.member.dto.MemberRequestDto;
 import com.example.graduation.member.repository.MemberRepository;
 import com.example.graduation.member.service.LoginService;
@@ -22,8 +23,11 @@ public class MemberController {
         return signUpSerivce.signUp(memberRequestDto);
     }
 
-    @PostMapping("/login")
-    public String login(@RequestBody String email, String password){
-        return loginService.isValidMemberIdAndPassword(email,password);
+
+    @PostMapping("/login2")
+    public String login2(@RequestBody MemberRequestDto memberRequestDto){
+        return loginService.permitUserLogin(memberRequestDto);
+
     }
+
 }

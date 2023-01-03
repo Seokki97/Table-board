@@ -1,5 +1,6 @@
 package com.example.graduation.member.dto;
 
+import com.example.graduation.member.domain.Member;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +24,12 @@ public class MemberDto {
 
     private String password;
 
+    public MemberDto(Member member){
+        this.id = member.getId();
+        this.email=member.getEmail();
+        this.nickname = member.getNickname();
+        this.password = member.getPassword();
+
+    }
 
 }

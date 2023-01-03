@@ -1,15 +1,18 @@
 package com.example.graduation.board.repository;
 
-import com.example.graduation.board.domain.TableBoard;
-import com.example.graduation.member.dto.MemberRequestDto;
+import com.example.graduation.board.domain.Board;
+
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-public interface BoardRepository extends JpaRepository<TableBoard, Long> {
-    Optional<TableBoard> findByTitle(String title);
+@Repository
+public interface BoardRepository extends JpaRepository<Board, Long> {
+    Optional<Board> findByTitle(String title);
 
-    Optional<TableBoard> findByContent(String content);
+    Optional<Board> findByContent(String content);
 
-    Optional<MemberRequestDto> findByNickname(String nickname);
+
+
 }

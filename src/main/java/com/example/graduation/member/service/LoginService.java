@@ -52,7 +52,15 @@ public class LoginService implements UserDetailsService {
         cookie.setSecure(true);
         httpServletResponse.addCookie(cookie);
         return new MemberDto(member);
+    }
 
+    public void logoutMember(HttpServletResponse httpServletResponse){
+        Cookie cookie = new Cookie("X-AUTH-TOKEN", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(false);
+        cookie.setMaxAge(0);
+        cookie.setPath("/");
+        httpServletResponse.addCookie(cookie);
     }
 
 }

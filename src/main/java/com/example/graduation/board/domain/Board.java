@@ -35,10 +35,6 @@ public class Board {
     @Column(nullable = false, length = 255)
     private String content;
 
-    @ManyToOne(cascade =CascadeType.ALL)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
    /* @OneToMany(mappedBy = "board")
     private List<Comment> comments = new ArrayList<>();
 
@@ -52,19 +48,21 @@ public class Board {
     private LocalDateTime updatedDate;
 
     @Builder
-    public Board(Long id, String title, String content, Member member){
+    public Board(Long id, String title, String content,
+                 LocalDateTime createdDate, LocalDateTime updatedDate){
         this.id = id;
-        this.member= member;
         this.title = title;
         this.content = content;
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
 
     }
 
-    public static Board creatBoard(BoardRequestDto boardRequestDto, Member member){
+    public static Board creatBoard(BoardRequestDto boardRequestDto){
         Board board = new Board();
         board.title = boardRequestDto.getTitle();
         board.content = boardRequestDto.getContent();
-        board.member = member;
+        board.setCreatedDate(LocalDateTime.now());
         return board;
     }
 }

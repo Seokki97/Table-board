@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/board/findByContent").permitAll()
                 .antMatchers("/board/showBoardList").permitAll()
                 .antMatchers("/board/showPost/{id}").permitAll()
+                .antMatchers("/board//updatePost/{id}").permitAll()
                 .antMatchers("/member").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()

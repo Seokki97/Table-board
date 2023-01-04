@@ -2,6 +2,7 @@ package com.example.graduation.board.service;
 
 import com.example.graduation.board.domain.Board;
 import com.example.graduation.board.dto.BoardRequestDto;
+import com.example.graduation.board.dto.BoardResponseDto;
 import com.example.graduation.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,13 +52,18 @@ public class BoardService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 개시글을 찾을 수 없습니다"));
         return board;
     }
+
     //게시글 수정 //updatedDate도 추가해야함
-    public Board modifiedPost(Long id, BoardRequestDto boardRequestDto){
-        //로직은 -> 먼저 findById로 받음 -> set으로 수정 -> updateddate적용 -> save
+    public Board modifiedPost(Long id, BoardRequestDto boardRequestDto) {
         Board board = showPost(id);
         //보드를 받아옴 //엔티티 클래스에서 setter 사용을 지양하자! -> 해당 클래스의 인스턴스 값들이 언제 어디서 변해야 하는지 구분하기 어려워짐
 
-        return board;
+        BoardResponseDto boardResponseDto = new BoardResponseDto(board.getId(), boardRequestDto.getTitle(), boardRequestDto.getContent());
+        boardResponseDto.setCreatedDate(board.getCreatedDate());
+        boardResponseDto.setUpdatedDate(LocalDateTime.now());
+        Board modifiedBoard = boardResponseDto.toEntity();
+        boardRepository.save(modifiedBoard);
+        return modifiedBoard;
     }
 
     //게시글 삭제

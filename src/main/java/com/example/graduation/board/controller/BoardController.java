@@ -2,6 +2,7 @@ package com.example.graduation.board.controller;
 
 import com.example.graduation.board.domain.Board;
 import com.example.graduation.board.dto.BoardRequestDto;
+import com.example.graduation.board.dto.BoardResponseDto;
 import com.example.graduation.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -47,4 +48,8 @@ public class BoardController {
         return boardService.showPost(id);
     }
 
+    @PutMapping("/updatePost/{id}")
+    public Board modifiedPost(@PathVariable("id") Long id, @RequestBody BoardRequestDto boardRequestDto){
+       return boardService.modifiedPost(id,boardRequestDto);
+    }
 }

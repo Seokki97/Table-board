@@ -1,6 +1,7 @@
 package com.example.graduation.board.domain;
 
 import com.example.graduation.board.dto.BoardRequestDto;
+import com.example.graduation.board.dto.BoardResponseDto;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -59,4 +60,5 @@ public final class Board {
         board.createdDate = boardRequestDto.getCreatedDate();
         return board;
     }
+
 }

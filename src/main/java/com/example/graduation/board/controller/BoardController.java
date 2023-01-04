@@ -8,10 +8,9 @@ import com.example.graduation.member.repository.MemberRepository;
 import com.example.graduation.member.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,10 +20,26 @@ public class BoardController {
     private final BoardService boardService;
 
 
-    @PostMapping("/content")
+    @PostMapping("/writeBoard")
     public ResponseEntity<Long> writeBoard(@RequestBody BoardRequestDto boardRequestDto){
         boardService.writePost(boardRequestDto);
         return ResponseEntity.ok().body(boardRequestDto.getId());
     }
 
+    @PostMapping("/findByTitle/{id}")
+    public ResponseEntity<Long> findWithTitle(@RequestBody BoardRequestDto boardRequestDto){
+        boardService.findPostWithTitle(boardRequestDto);
+        return ResponseEntity.ok().body(boardRequestDto.getId());
+    }
+    @PostMapping("/findByContent/{id}")
+    public ResponseEntity<Long> findWithContent(@RequestBody BoardRequestDto boardRequestDto){
+        boardService.findPostWithContent(boardRequestDto);
+        return ResponseEntity.ok().body(boardRequestDto.getId());
+    }
+
+    @GetMapping("/showBoardList")
+    public List<Board> showBoardList(){
+
+        return boardService.showAllPostList();
+    }
 }

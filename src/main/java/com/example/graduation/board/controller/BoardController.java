@@ -37,19 +37,19 @@ public class BoardController {
     }
 
     @GetMapping("/showBoardList")
-    public List<Board> showBoardList() {
+    public ResponseEntity<List<Board>> showBoardList() {
 
-        return boardService.showAllPostList();
+        return ResponseEntity.ok().body(boardService.showAllPostList());
     }
 
     @GetMapping("/showPost/{id}")
-    public Board showPost(@PathVariable("id") Long id) {
+    public ResponseEntity<Board> showPost(@PathVariable("id") Long id) {
 
-        return boardService.showPost(id);
+        return ResponseEntity.ok().body(boardService.showPost(id));
     }
 
     @PutMapping("/updatePost/{id}")
-    public Board modifiedPost(@PathVariable("id") Long id, @RequestBody BoardRequestDto boardRequestDto){
-       return boardService.modifiedPost(id,boardRequestDto);
+    public ResponseEntity<Board> modifiedPost(@PathVariable("id") Long id, @RequestBody BoardRequestDto boardRequestDto){
+       return ResponseEntity.ok().body(boardService.modifiedPost(id,boardRequestDto));
     }
 }

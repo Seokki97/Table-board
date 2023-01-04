@@ -3,6 +3,7 @@ package com.example.graduation.board.service;
 import com.example.graduation.board.domain.Board;
 import com.example.graduation.board.dto.BoardRequestDto;
 
+import com.example.graduation.board.dto.BoardResponseDto;
 import com.example.graduation.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,6 +46,16 @@ public class BoardService {
 
         return  boardList;
     }
+    //게시글 단일 조회 -> 게시물 제목을 클릭하면 해당 게시물의 내용을 보내주면됨
+    public Board showPost(Long id){
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 개시글을 찾을 수 없습니다"));
+        return board;
+    }
+    //게시글 수정
+
+    //게시글 삭제
+
 
 
 }

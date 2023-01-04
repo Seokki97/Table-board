@@ -8,6 +8,7 @@ import com.example.graduation.member.repository.MemberRepository;
 import com.example.graduation.member.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,12 +27,12 @@ public class BoardController {
         return ResponseEntity.ok().body(boardRequestDto.getId());
     }
 
-    @PostMapping("/findByTitle/{id}")
+    @PostMapping("/findByTitle")
     public ResponseEntity<Long> findWithTitle(@RequestBody BoardRequestDto boardRequestDto){
         boardService.findPostWithTitle(boardRequestDto);
         return ResponseEntity.ok().body(boardRequestDto.getId());
     }
-    @PostMapping("/findByContent/{id}")
+    @PostMapping("/findByContent")
     public ResponseEntity<Long> findWithContent(@RequestBody BoardRequestDto boardRequestDto){
         boardService.findPostWithContent(boardRequestDto);
         return ResponseEntity.ok().body(boardRequestDto.getId());
@@ -42,4 +43,11 @@ public class BoardController {
 
         return boardService.showAllPostList();
     }
+
+    @GetMapping("/showPost/{id}")
+    public Board showPost(@PathVariable("id") Long id){
+
+        return boardService.showPost(id);
+    }
+
 }

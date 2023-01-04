@@ -13,6 +13,11 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     Optional<Board> findByContent(String content);
 
+    Optional<Board> findById(Long id);
 
+    boolean existsByTitle(String title);
+
+    boolean existsByContent(String content);
+    boolean existsById(Long id);
 
 }

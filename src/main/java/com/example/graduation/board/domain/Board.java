@@ -28,7 +28,7 @@ public class Board {
     private String title;
 
     @NotNull
-    @Column(nullable = false, length = 255)
+    @Column(nullable = false, length = 1000)
     private String content;
 
    /* @OneToMany(mappedBy = "board")

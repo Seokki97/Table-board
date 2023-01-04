@@ -20,14 +20,14 @@ public class MemberRequestDto {
 
 
     @Builder
-    public MemberRequestDto(Long id, String email, String nickname, String password){
+    public MemberRequestDto(Long id, String email, String nickname, String password) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;
         this.password = password;
     }
 
-    public Member toEntity(){
+    public Member toEntity() {
         return Member.builder()
                 .id(id)
                 .email(email)

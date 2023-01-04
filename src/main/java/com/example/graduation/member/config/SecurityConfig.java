@@ -22,22 +22,35 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic().disable()
                 .cors().disable()
                 .csrf().disable()
+
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+
                 .authorizeRequests()
                 .antMatchers("/member/login").permitAll()
                 .antMatchers("/member/login2").permitAll()
-
-
+                .antMatchers("/board/content").permitAll()
                 .antMatchers("/member/signUp").permitAll()
+                .antMatchers("/board/writeBoard").permitAll()
+                .antMatchers("/board/findByTitle").permitAll()
+                .antMatchers("/board/findByContent").permitAll()
+                .antMatchers("/board/showBoardList").permitAll()
+                .antMatchers("/board/showPost/{id}").permitAll()
                 .antMatchers("/member").hasRole("USER")
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/member/")
+                .defaultSuccessUrl("/{id}")
+                .permitAll();
+
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
+
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",
             "/v3/api-docs/**",
@@ -52,6 +65,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui/**",
             "/h2/**"
     };
+
     // 정적인 파일 요청에 대해 무시
     @Override
     public void configure(WebSecurity web) throws Exception {

@@ -1,8 +1,6 @@
 package com.example.graduation.board.domain;
 
-
 import com.example.graduation.board.dto.BoardRequestDto;
-import com.example.graduation.member.domain.Member;
 import com.sun.istack.NotNull;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -13,8 +11,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name = "board")
@@ -49,7 +45,7 @@ public class Board {
 
     @Builder
     public Board(Long id, String title, String content,
-                 LocalDateTime createdDate, LocalDateTime updatedDate){
+                 LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -58,7 +54,7 @@ public class Board {
 
     }
 
-    public static Board creatBoard(BoardRequestDto boardRequestDto){
+    public static Board creatBoard(BoardRequestDto boardRequestDto) {
         Board board = new Board();
         board.title = boardRequestDto.getTitle();
         board.content = boardRequestDto.getContent();

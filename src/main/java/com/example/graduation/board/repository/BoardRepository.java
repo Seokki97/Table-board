@@ -18,6 +18,7 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     boolean existsByTitle(String title);
 
     boolean existsByContent(String content);
+
     boolean existsById(Long id);
 
 }

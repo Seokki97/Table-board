@@ -1,8 +1,6 @@
 package com.example.graduation.member.dto;
 
-
 import lombok.*;
-
 
 @Data
 @NoArgsConstructor

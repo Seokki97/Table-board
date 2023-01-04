@@ -14,7 +14,7 @@ public class BoardResponseDto {
 
     private String content;
 
-    public Board toEntity(){
+    public Board toEntity() {
         return Board.builder()
                 .id(id)
                 .title(title)

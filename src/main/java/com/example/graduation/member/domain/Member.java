@@ -28,12 +28,12 @@ public class Member {
     private String password;
 
     //패스워드 암호화
-    public void encodePassword(PasswordEncoder passwordEncoder){
+    public void encodePassword(PasswordEncoder passwordEncoder) {
         this.password = passwordEncoder.encode(password);
     }
 
     @Builder
-    public Member(Long id, String email, String nickname, String password){
+    public Member(Long id, String email, String nickname, String password) {
         this.id = id;
         this.email = email;
         this.nickname = nickname;

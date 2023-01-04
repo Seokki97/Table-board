@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -15,8 +16,8 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     public Board writePost(BoardRequestDto boardRequestDto) {
+        boardRequestDto.setCreatedDate(LocalDateTime.now());
         Board board = Board.creatBoard(boardRequestDto);
-        LocalDate.now();
         return boardRepository.save(board);
 
     }
@@ -50,7 +51,14 @@ public class BoardService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 개시글을 찾을 수 없습니다"));
         return board;
     }
-    //게시글 수정
+    //게시글 수정 //updatedDate도 추가해야함
+    public Board modifiedPost(Long id, BoardRequestDto boardRequestDto){
+        //로직은 -> 먼저 findById로 받음 -> set으로 수정 -> updateddate적용 -> save
+        Board board = showPost(id);
+        //보드를 받아옴 //엔티티 클래스에서 setter 사용을 지양하자! -> 해당 클래스의 인스턴스 값들이 언제 어디서 변해야 하는지 구분하기 어려워짐
+
+        return board;
+    }
 
     //게시글 삭제
 

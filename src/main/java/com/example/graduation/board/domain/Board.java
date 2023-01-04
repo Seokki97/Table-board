@@ -2,10 +2,7 @@ package com.example.graduation.board.domain;
 
 import com.example.graduation.board.dto.BoardRequestDto;
 import com.sun.istack.NotNull;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -13,10 +10,11 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name = "board")
+@Getter
+@ToString
 @Table(name = "board")
-@Data
-public class Board {
+@Entity(name = "board")
+public final class Board {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -58,7 +56,7 @@ public class Board {
         Board board = new Board();
         board.title = boardRequestDto.getTitle();
         board.content = boardRequestDto.getContent();
-        board.setCreatedDate(LocalDateTime.now());
+        board.createdDate = boardRequestDto.getCreatedDate();
         return board;
     }
 }

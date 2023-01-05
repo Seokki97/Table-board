@@ -18,38 +18,39 @@ public class BoardController {
     private final BoardService boardService;
 
 
-    @PostMapping("/writeBoard")
+    @PostMapping("/write")
     public ResponseEntity<Long> writeBoard(@RequestBody BoardRequestDto boardRequestDto) {
         boardService.writePost(boardRequestDto);
         return ResponseEntity.ok().body(boardRequestDto.getId());
     }
 
-    @PostMapping("/findByTitle")
+    @PostMapping("/title")
     public ResponseEntity<Long> findWithTitle(@RequestBody BoardRequestDto boardRequestDto) {
         boardService.findPostWithTitle(boardRequestDto);
         return ResponseEntity.ok().body(boardRequestDto.getId());
     }
 
-    @PostMapping("/findByContent")
+    @PostMapping("/content")
     public ResponseEntity<Long> findWithContent(@RequestBody BoardRequestDto boardRequestDto) {
         boardService.findPostWithContent(boardRequestDto);
         return ResponseEntity.ok().body(boardRequestDto.getId());
     }
 
-    @GetMapping("/showBoardList")
+    @GetMapping("/board-list")
     public ResponseEntity<List<Board>> showBoardList() {
 
         return ResponseEntity.ok().body(boardService.showAllPostList());
     }
 
-    @GetMapping("/showPost/{id}")
+    @GetMapping("/post/{id}")
     public ResponseEntity<Board> showPost(@PathVariable("id") Long id) {
 
         return ResponseEntity.ok().body(boardService.showPost(id));
     }
 
-    @PutMapping("/updatePost/{id}")
+    @PutMapping("/modifying/{id}")
     public ResponseEntity<Board> modifiedPost(@PathVariable("id") Long id, @RequestBody BoardRequestDto boardRequestDto){
        return ResponseEntity.ok().body(boardService.modifiedPost(id,boardRequestDto));
     }
+
 }

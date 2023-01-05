@@ -24,7 +24,7 @@ public class BoardController {
         return ResponseEntity.ok().body(boardRequestDto.getId());
     }
 
-    @PostMapping("/title")
+    @DeleteMapping("/title")
     public ResponseEntity<Long> findWithTitle(@RequestBody BoardRequestDto boardRequestDto) {
         boardService.findPostWithTitle(boardRequestDto);
         return ResponseEntity.ok().body(boardRequestDto.getId());
@@ -53,4 +53,9 @@ public class BoardController {
        return ResponseEntity.ok().body(boardService.modifiedPost(id,boardRequestDto));
     }
 
+    @DeleteMapping("/deletion/{id}")
+    public ResponseEntity<?> deletePost(@PathVariable("id") Long id) {
+        boardService.deletePost(id);
+        return ResponseEntity.ok().body(true);
+    }
 }

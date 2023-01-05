@@ -7,7 +7,6 @@ import com.example.graduation.board.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -59,7 +58,7 @@ public class BoardService {
         //보드를 받아옴 //엔티티 클래스에서 setter 사용을 지양하자! -> 해당 클래스의 인스턴스 값들이 언제 어디서 변해야 하는지 구분하기 어려워짐
 
         BoardResponseDto boardResponseDto = new BoardResponseDto(board.getId(), boardRequestDto.getTitle(), boardRequestDto.getContent());
-        boardResponseDto.setCreatedDate(board.getCreatedDate());
+        boardResponseDto.setCreatedDate(board.getCreatedDate()); // 생성일자는 유지해놔야하기 때문에
         boardResponseDto.setUpdatedDate(LocalDateTime.now());
         Board modifiedBoard = boardResponseDto.toEntity();
         boardRepository.save(modifiedBoard);
@@ -67,6 +66,12 @@ public class BoardService {
     }
 
     //게시글 삭제
+    public void deletePost(Long id){
+        Board board = boardRepository.findById(id)
+                .orElseThrow(()->new IllegalArgumentException("해당 게시물을 찾을 수 없습니다"));
+
+        boardRepository.delete(board);
+    }
 
 
 }

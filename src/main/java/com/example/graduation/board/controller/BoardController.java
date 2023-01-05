@@ -49,8 +49,8 @@ public class BoardController {
     }
 
     @PutMapping("/modifying/{id}")
-    public ResponseEntity<Board> modifiedPost(@PathVariable("id") Long id, @RequestBody BoardRequestDto boardRequestDto){
-       return ResponseEntity.ok().body(boardService.modifiedPost(id,boardRequestDto));
+    public ResponseEntity<Board> modifiedPost(@PathVariable("id") Long id, @RequestBody BoardRequestDto boardRequestDto) {
+        return ResponseEntity.ok().body(boardService.modifiedPost(id, boardRequestDto));
     }
 
     @DeleteMapping("/deletion/{id}")

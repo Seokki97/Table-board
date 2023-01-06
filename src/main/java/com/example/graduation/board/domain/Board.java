@@ -1,7 +1,7 @@
 package com.example.graduation.board.domain;
 
 import com.example.graduation.board.dto.BoardRequestDto;
-import com.example.graduation.board.dto.BoardResponseDto;
+import com.example.graduation.member.domain.Member;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -35,7 +35,9 @@ public final class Board {
 
     @OneToMany(mappedBy = "board")
     private List<Recommend> recommends = new ArrayList<>();*/
-
+//내가 만약에 로그인을 했어,
+    @ManyToOne
+    private Member member;
     @CreatedDate
     private LocalDateTime createdDate;
 

@@ -2,7 +2,6 @@ package com.example.graduation.board.controller;
 
 import com.example.graduation.board.domain.Board;
 import com.example.graduation.board.dto.BoardRequestDto;
-import com.example.graduation.board.dto.BoardResponseDto;
 import com.example.graduation.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

@@ -27,6 +27,11 @@ public class MemberController {
         return loginService.permitUserLogin(memberRequestDto);
 
     }
+
+    @PostMapping("/test")
+    public String test(){
+            return "성공이요";
+        }
 /*
     @PostMapping("/logout")
     public void logout(HttpServletResponse httpServletResponse){

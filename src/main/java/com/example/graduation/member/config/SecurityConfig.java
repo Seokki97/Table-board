@@ -1,5 +1,7 @@
 package com.example.graduation.member.config;
 
+import com.example.graduation.member.jwt.JwtAuthenticationFilter;
+import com.example.graduation.member.jwt.JwtTokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,11 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final JwtTokenService jwtTokenService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -31,6 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/member/login2").permitAll()
                 .antMatchers("/board/content").permitAll()
                 .antMatchers("/member/signUp").permitAll()
+                .antMatchers("/member/test").permitAll()
                 .antMatchers("/board/**").permitAll()
                 /*.antMatchers("/board/findByTitle").permitAll()
                 .antMatchers("/board/findByContent").permitAll()
@@ -43,7 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin()
                 .loginPage("/member/")
                 .defaultSuccessUrl("/{id}")
-                .permitAll();
+                .and()
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenService), UsernamePasswordAuthenticationFilter.class);
+
+                http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     }
 

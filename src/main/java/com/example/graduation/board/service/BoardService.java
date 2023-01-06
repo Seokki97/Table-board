@@ -4,21 +4,29 @@ import com.example.graduation.board.domain.Board;
 import com.example.graduation.board.dto.BoardRequestDto;
 import com.example.graduation.board.dto.BoardResponseDto;
 import com.example.graduation.board.repository.BoardRepository;
+
+import com.example.graduation.member.domain.Member;
+import com.example.graduation.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 @Service
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
 
+    private final MemberRepository memberRepository;
+
     public Board writePost(BoardRequestDto boardRequestDto) {
+        Member member = memberRepository.findById(boardRequestDto.getMemberId()).get();
         boardRequestDto.setCreatedDate(LocalDateTime.now());
-        Board board = Board.creatBoard(boardRequestDto);
-        return boardRepository.save(board);
+
+        return boardRepository.save(boardRequestDto.toEntity(member));
 
     }
 

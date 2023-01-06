@@ -5,12 +5,13 @@ import com.example.graduation.member.domain.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 
-@Table(name = "member")
+@Table(name = "board")
 @Data
 public class BoardRequestDto {
 
@@ -23,17 +24,15 @@ public class BoardRequestDto {
     private String writer;
 
     private Long memberId;
-
     private LocalDateTime createdDate;
 
     private LocalDateTime updatedDate;
 
-
     @Builder
-    public BoardRequestDto(Long memberId ,String title, String content ) {
+    public BoardRequestDto(Long id, String title, String content) {
         this.title = title;
         this.content = content;
-        this.memberId = memberId;
+        this.id = id;
     }
 
     public Board toEntity(Member member) {

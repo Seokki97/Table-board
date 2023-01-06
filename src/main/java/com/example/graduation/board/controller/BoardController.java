@@ -17,9 +17,9 @@ public class BoardController {
     private final BoardService boardService;
 
 
-    @PostMapping("/write")
-    public ResponseEntity<Long> writeBoard(@RequestBody BoardRequestDto boardRequestDto) {
-        boardService.writePost(boardRequestDto);
+    @PostMapping("/write/{member_id}")
+    public ResponseEntity<Long> writeBoard(@RequestBody BoardRequestDto boardRequestDto,@PathVariable("member_id") Long memberId) {
+        boardService.writePost(memberId,boardRequestDto);
         return ResponseEntity.ok().body(boardRequestDto.getId());
     }
 

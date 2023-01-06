@@ -7,13 +7,12 @@ import com.example.graduation.board.repository.BoardRepository;
 
 import com.example.graduation.member.domain.Member;
 import com.example.graduation.member.repository.MemberRepository;
+import com.example.graduation.member.service.LoginService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
 
 @Service
 @RequiredArgsConstructor
@@ -22,11 +21,14 @@ public class BoardService {
 
     private final MemberRepository memberRepository;
 
-    public Board writePost(BoardRequestDto boardRequestDto) {
-        Member member = memberRepository.findById(boardRequestDto.getMemberId()).get();
-        boardRequestDto.setCreatedDate(LocalDateTime.now());
+    private final LoginService loginService;
+    public Board writePost(Long memberId, BoardRequestDto boardRequestDto) {
 
-        return boardRepository.save(boardRequestDto.toEntity(member));
+        //멤버아이디를 모르는데 어케찾아?
+        Member member = memberRepository.findById(memberRepository.findById(memberId).get().getId()).get();
+        boardRequestDto.setCreatedDate(LocalDateTime.now());
+        Board board = boardRepository.save(boardRequestDto.toEntity(member));
+        return board;
 
     }
 

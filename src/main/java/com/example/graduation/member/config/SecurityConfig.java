@@ -31,27 +31,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 
                 .authorizeRequests()
-                .antMatchers("/member/login").permitAll()
-                .antMatchers("/member/login2").permitAll()
-                .antMatchers("/board/content").permitAll()
-                .antMatchers("/member/signUp").permitAll()
-                .antMatchers("/member/test").permitAll()
                 .antMatchers("/board/**").permitAll()
-                /*.antMatchers("/board/findByTitle").permitAll()
-                .antMatchers("/board/findByContent").permitAll()
-                .antMatchers("/board/showBoardList").permitAll()
-                .antMatchers("/board/showPost/{id}").permitAll()
-                .antMatchers("/board//updatePost/{id}").permitAll()*/
                 .antMatchers("/member").hasRole("USER")
+                .antMatchers("/member/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/member/")
                 .defaultSuccessUrl("/{id}")
                 .and()
+                .logout()
+                .invalidateHttpSession(true)
+                .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenService), UsernamePasswordAuthenticationFilter.class);
-
-                http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     }
 

@@ -29,7 +29,6 @@ public class BoardService {
         boardRequestDto.setCreatedDate(LocalDateTime.now());
         Board board = boardRepository.save(boardRequestDto.toEntity(member));
         return board;
-
     }
 
     //해당 제목과 일치하는 board 반환
@@ -37,6 +36,7 @@ public class BoardService {
         if (!boardRepository.existsByTitle(boardRequestDto.getTitle())) {
             throw new IllegalArgumentException("해당 제목과 일치한 게시물이 없습니다.");
         }
+        System.out.println("왜안떠");
         return boardRepository.findByTitle(boardRequestDto.getTitle()).get();
     }
 
@@ -62,21 +62,27 @@ public class BoardService {
         return board;
     }
 
-    //게시글 수정 //updatedDate도 추가해야함
-    public Board modifiedPost(Long id, BoardRequestDto boardRequestDto) {
+    //게시글 수정 //updatedDate도 추가해야함 //멤버아이디도 있어야함
+    public Board modifiedPost(Long id,Long memberId, BoardRequestDto boardRequestDto) {
         Board board = showPost(id);
         //보드를 받아옴 //엔티티 클래스에서 setter 사용을 지양하자! -> 해당 클래스의 인스턴스 값들이 언제 어디서 변해야 하는지 구분하기 어려워짐
-
+        if(!memberRepository.existsById(memberRepository.findById(memberId).get().getId())){
+            throw new IllegalArgumentException("로그인 상태가 아닙니다.");
+        }
+        Member member = memberRepository.findById(memberRepository.findById(memberId).get().getId()).get();
         BoardResponseDto boardResponseDto = new BoardResponseDto(board.getId(), boardRequestDto.getTitle(), boardRequestDto.getContent());
         boardResponseDto.setCreatedDate(board.getCreatedDate()); // 생성일자는 유지해놔야하기 때문에
         boardResponseDto.setUpdatedDate(LocalDateTime.now());
-        Board modifiedBoard = boardResponseDto.toEntity();
+        Board modifiedBoard = boardResponseDto.toEntity(member);
         boardRepository.save(modifiedBoard);
         return modifiedBoard;
     }
 
     //게시글 삭제
-    public void deletePost(Long id){
+    public void deletePost(Long id,Long memberId){
+        if(!memberRepository.existsById(memberRepository.findById(memberId).get().getId())){
+            throw new IllegalArgumentException("로그인 상태가 아닙니다.");
+        }
         Board board = boardRepository.findById(id)
                 .orElseThrow(()->new IllegalArgumentException("해당 게시물을 찾을 수 없습니다"));
 

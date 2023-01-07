@@ -36,7 +36,7 @@ public class BoardService {
         if (!boardRepository.existsByTitle(boardRequestDto.getTitle())) {
             throw new IllegalArgumentException("해당 제목과 일치한 게시물이 없습니다.");
         }
-        System.out.println("왜안떠");
+        System.out.println(boardRepository.findByTitle(boardRequestDto.getTitle()).get());
         return boardRepository.findByTitle(boardRequestDto.getTitle()).get();
     }
 

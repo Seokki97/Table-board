@@ -2,10 +2,9 @@ package com.example.graduation.board.dto;
 
 import com.example.graduation.board.domain.Board;
 import com.example.graduation.member.domain.Member;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+
 
 import javax.persistence.Table;
 import java.time.LocalDateTime;

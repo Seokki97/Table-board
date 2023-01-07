@@ -1,6 +1,5 @@
 package com.example.graduation.board.domain;
 
-import com.example.graduation.board.dto.BoardRequestDto;
 import com.example.graduation.member.domain.Member;
 import com.sun.istack.NotNull;
 import lombok.*;

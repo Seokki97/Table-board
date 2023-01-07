@@ -57,13 +57,6 @@ public final class Board {
         this.writer = member.getNickname();
         this.member = member;
     }
-/*
-    public static Board creatBoard(BoardRequestDto boardRequestDto) {
-        Board board = new Board();
-        board.title = boardRequestDto.getTitle();
-        board.content = boardRequestDto.getContent();
-        board.createdDate = boardRequestDto.getCreatedDate();
-        return board;
-    }*/
+
 
 }

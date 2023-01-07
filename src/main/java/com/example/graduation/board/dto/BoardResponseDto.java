@@ -1,6 +1,7 @@
 package com.example.graduation.board.dto;
 
 import com.example.graduation.board.domain.Board;
+import com.example.graduation.member.domain.Member;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -26,8 +27,9 @@ public class BoardResponseDto {
         this.title = title;
         this.content = content;
     }
-    public Board toEntity() {
+    public Board toEntity(Member member) {
         return Board.builder()
+                .member(member)
                 .id(id)
                 .title(title)
                 .content(content)

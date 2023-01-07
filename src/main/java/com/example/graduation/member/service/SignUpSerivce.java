@@ -20,7 +20,6 @@ public class SignUpSerivce {
         if (memberRepository.findByEmail(memberRequestDto.getEmail()).isPresent()) {
             throw new Exception("이미 존재하는 이메일입니다");
         }
-
     }
 
     //닉네임 중복 확인

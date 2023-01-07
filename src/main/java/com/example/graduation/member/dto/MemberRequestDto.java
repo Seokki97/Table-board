@@ -18,7 +18,6 @@ public class MemberRequestDto {
 
     private String password;
 
-
     @Builder
     public MemberRequestDto(Long id, String email, String nickname, String password) {
         this.id = id;

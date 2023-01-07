@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Table(name = "member")
 public class MemberDto {
 
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
@@ -27,7 +26,5 @@ public class MemberDto {
         this.email = member.getEmail();
         this.nickname = member.getNickname();
         this.password = member.getPassword();
-
     }
-
 }

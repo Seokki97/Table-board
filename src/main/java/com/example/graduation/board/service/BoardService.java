@@ -24,7 +24,8 @@ public class BoardService {
     //게시물 작성 api
     public Board writePost(Long memberId, BoardRequestDto boardRequestDto) {
 
-        Member member = memberRepository.findById(memberRepository.findById(memberId).get().getId()).get();
+        Member member = memberRepository.findById(memberRepository.findById(memberId).get().getId()).orElseThrow(()->
+               new IllegalArgumentException("로그인이 안되어있습니다"));
         boardRequestDto.setCreatedDate(LocalDateTime.now());
         Board board = boardRepository.save(boardRequestDto.toEntity(member));
         return board;

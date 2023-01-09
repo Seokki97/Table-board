@@ -22,6 +22,8 @@
 
 ### 사용한 기술
 
+- ☑️Java 11
+- ☑️SpringBoot
 - ☑️AWS EC2 :
     - 서버 배포를 위해 사용
 - ☑️AWS RDS :
